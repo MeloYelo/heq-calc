@@ -3,7 +3,7 @@ using System.IO;
 
 namespace UIConsole
 {
-	public class Logger
+	public class Logger : ILogger
 	{
 		public void WriteToLog(string text)
 		{

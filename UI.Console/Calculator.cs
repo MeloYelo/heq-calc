@@ -4,7 +4,12 @@ namespace UIConsole
 {
 	public class Calculator
 	{
-		private readonly Logger _logger = new Logger();
+		private readonly ILogger _logger;
+
+		public Calculator(ILogger logger)
+		{
+			_logger = logger;
+		}
 
 		public float Sum(string value1, string value2)
 		{
@@ -16,7 +21,7 @@ namespace UIConsole
 				valid = false;
 				_logger.WriteToLog("Not a valid number: " + value1);
 			}
-		
+
 			if (!float.TryParse(value2, out fval2))
 			{
 				valid = false;

@@ -6,7 +6,7 @@ namespace UIConsole
 	{
 		static void Main(string[] args)
 		{
-			var calculator = new Calculator();
+			var calculator = new Calculator(new Logger());
 			Console.WriteLine("Calculating the sum of two values");
 			Console.WriteLine("=================================");
 			Console.Write("enter value 1: ");

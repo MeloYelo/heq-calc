@@ -9,14 +9,14 @@ namespace UIConsole
 		[Test]
 		public void TestValidValuesGetsCorrectSum()
 		{
-			var calculator = new Calculator();
+			var calculator = new Calculator(new FakeLogger());
 			Assert.AreEqual(calculator.Sum("1", "1"), 2);
 		}
 
 		[Test]
 		public void TestInvalidValuesThrows()
 		{
-			var calculator = new Calculator();
+			var calculator = new Calculator(new FakeLogger());
 			Assert.Throws<ArgumentException>(() => calculator.Sum("a", "1"));
 		}
 	}

@@ -1,4 +1,5 @@
 ﻿using System;
+using Moq;
 using NUnit.Framework;
 
 namespace UIConsole
@@ -9,22 +10,22 @@ namespace UIConsole
 		[Test]
 		public void TestValidValuesGetsCorrectSum()
 		{
-			var calculator = new Calculator(new FakeLogger());
+			var calculator = new Calculator(Mock.Of<ILogger>());
 			Assert.AreEqual(calculator.Sum("1", "1"), 2);
 		}
 
 		[Test]
 		public void TestInvalidValuesThrows()
 		{
-			var calculator = new Calculator(new FakeLogger());
+			var calculator = new Calculator(Mock.Of<ILogger>());
 			Assert.Throws<ArgumentException>(() => calculator.Sum("a", "1"));
 		}
 
 		[Test]
 		public void TestInvalidValuesLogsErrorMessage()
 		{
-			var fakeLogger = new FakeLogger();
-			var calculator = new Calculator(fakeLogger);
+			var fakeLogger = new Mock<ILogger>();
+			var calculator = new Calculator(fakeLogger.Object);
 			try
 			{
 				calculator.Sum("a", "1");
@@ -32,7 +33,7 @@ namespace UIConsole
 			catch (ArgumentException)
 			{
 			}
-			Assert.IsTrue(fakeLogger.CalledWriteToLog);
+			fakeLogger.Verify(f => f.WriteToLog(It.IsAny<string>()));
 		}
 	}
 }
